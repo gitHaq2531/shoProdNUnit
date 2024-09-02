@@ -30,6 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="shoProd_1.2\" />
     <Folder Include="Reports\" />
     <Folder Include="Screenshots\" />
   </ItemGroup>
