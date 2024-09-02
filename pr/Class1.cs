@@ -10,6 +10,7 @@ namespace shoProd.pr
     {
         public void test1() {
             Console.WriteLine("executerd");
+            Console.WriteLine("new ex");
         }
     }
 }

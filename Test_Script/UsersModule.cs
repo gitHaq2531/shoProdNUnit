@@ -17,8 +17,9 @@ namespace shoProd.Test_Script
         {
             Console.WriteLine("addTo cart");
             BooksPage bp = hp.clickOnBooksLink();
+            Assert.AreEqual("hy", "hello");
             ComicsPage cp = bp.ClickOnComicsLink();
-            Assert.Fail();
+            //Assert.Fail();
             cp.getAddToCartButton().SendKeys(Keys.Enter);
             Thread.Sleep(2000);
             IAlert alert = driver.SwitchTo().Alert();
