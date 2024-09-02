@@ -19,6 +19,7 @@ namespace shoProd.GenericUtility
             IXLRow row = sheet.Row(rowNum);
             IXLCell cell= row.Cell(cellNum);
             string value = cell.GetValue<string>();
+            wb.Dispose();
             return value;
         }
     }

@@ -15,7 +15,6 @@ namespace shoProd.Test_Script
         {
             
             Console.WriteLine("hey c#");
-            Assert.Fail();
             Console.WriteLine("bye");
         }
 

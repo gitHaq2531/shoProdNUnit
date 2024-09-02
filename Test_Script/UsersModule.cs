@@ -9,6 +9,7 @@ using OpenQA.Selenium;
 
 namespace shoProd.Test_Script
 {
+    [TestFixture]
     internal class UsersModule:BaseClass
     {
         [Test]
@@ -17,6 +18,7 @@ namespace shoProd.Test_Script
             Console.WriteLine("addTo cart");
             BooksPage bp = hp.clickOnBooksLink();
             ComicsPage cp = bp.ClickOnComicsLink();
+            Assert.Fail();
             cp.getAddToCartButton().SendKeys(Keys.Enter);
             Thread.Sleep(2000);
             IAlert alert = driver.SwitchTo().Alert();
@@ -43,7 +45,8 @@ namespace shoProd.Test_Script
             MyWishlistPage wp = ep.ClickOnWishlistIcon();
             wp.ClickOnAddToCartlink();
             driver.SwitchTo().Alert().Accept();
-            hp.getMyCartLink().Click();            
+            hp.getMyCartLink().Click();
+            Assert.Fail();
         }
 
 
