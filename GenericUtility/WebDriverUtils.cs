@@ -25,7 +25,7 @@ namespace shoProd.GenericUtility
             return wait;
         }
 
-        public void WaitForAlertToBePresent()  {
+        public void WaitForAlertToBePresent()  { 
             ExpilicitWait().Until(ExpectedConditions.AlertIsPresent());
         }
 
@@ -64,6 +64,7 @@ namespace shoProd.GenericUtility
         public SelectElement SelectElement(IWebElement element)
         {
             SelectElement select = new SelectElement(element);
+            
             return select;
         }
 

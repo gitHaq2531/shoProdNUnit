@@ -1,5 +1,7 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Support.UI;
+using SeleniumExtras.WaitHelpers;
 using shoProd.ObjectRepositoryShoProd;
 using shoProdSample.ObjectRepositoryShoProd;
 using System;
@@ -16,10 +18,12 @@ namespace shoProd.Test_Script
         SignInSignUpPage sp;
 
         [OneTimeSetUp]
+        
         public void OneTimeSet()
         {
             driver = new ChromeDriver();
             driver.Manage().Window.Maximize();
+            
         }
 
         [SetUp]
@@ -32,12 +36,13 @@ namespace shoProd.Test_Script
             sp.getLogInPasswordTextField().SendKeys("miller123");
             sp.getLoginButton().Click();
         }
-
+        
         [TearDown]
         public void TearDown()
         {
             HomePage hp=new HomePage(driver);
             hp.getLogoutLink().Click();
+            
         }
 
         [OneTimeTearDown]
@@ -63,7 +68,7 @@ namespace shoProd.Test_Script
         [Test]
         public void Test1()
         {
-            Console.WriteLine("test 1");
+            Console.WriteLine("test 1");            
         }
 
         [Test,Order(0)]
@@ -81,7 +86,7 @@ namespace shoProd.Test_Script
         [Test,Order(1)]
         public void Test4()
         {
-            Console.WriteLine("test 4");
+                        Console.WriteLine("test 4");
         }
 
     }

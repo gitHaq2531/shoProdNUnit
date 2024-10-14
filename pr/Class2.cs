@@ -3,14 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
 
 namespace shoProd.pr
 {
-    internal class Class2
+    internal class Class2:Class1
     {
-        public void Upt()
+        [Test]
+       
+            public void test1()
         {
-            Console.WriteLine("hye");
+            Console.WriteLine("hyy");
+            base.test1();
         }
+        
     }
 }

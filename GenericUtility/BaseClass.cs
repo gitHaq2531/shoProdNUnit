@@ -1,21 +1,13 @@
-﻿using OpenQA.Selenium;
+﻿using AventStack.ExtentReports;
+using AventStack.ExtentReports.Reporter;
+using AventStack.ExtentReports.Reporter.Config;
+using NUnit.Framework.Interfaces;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Edge;
 using OpenQA.Selenium.Firefox;
 using shoProd.ObjectRepositoryShoProd;
 using shoProdSample.ObjectRepositoryShoProd;
-using shoProd.GenericUtility;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NUnit.Framework.Interfaces;
-using OpenQA.Selenium.Internal.Logging;
-using AventStack.ExtentReports.Reporter;
-using AventStack.ExtentReports;
-using AventStack.ExtentReports.Reporter.Config;
-using NUnit.Framework.Internal;
 
 namespace shoProd.GenericUtility
 {
@@ -27,20 +19,19 @@ namespace shoProd.GenericUtility
         ExtentTest test;
         string testName = "";
         public IWebDriver driver;
-
-        public ActionTargets Targets => throw new NotImplementedException();
-
+        
         [OneTimeSetUp]
         public void LaunchBrowser()
         {
+            string browser = excelUtils.getDataFromExcelFile(1, 2);
             ExtentSparkReporter spark = new ExtentSparkReporter("C:\\Users\\afzau\\source\\repos\\shoProd\\Reports\\advanceReport.html");
             spark.Config.DocumentTitle = "shoProdAppReport";
             spark.Config.ReportName = "shoProdApp";
             spark.Config.Theme = Theme.Dark;
             reports = new ExtentReports();
             reports.AttachReporter(spark);
-
-            string browser = excelUtils.getDataFromExcelFile(1, 2);
+            reports.AddSystemInfo("os", "windows 11");
+            reports.AddSystemInfo("browser", browser);
             string url = excelUtils.getDataFromExcelFile(2, 2);
             if (browser.Equals("chrome"))
             {
@@ -59,6 +50,7 @@ namespace shoProd.GenericUtility
             driver.Url = url;
         }
 
+        
         [SetUp]
         public void Setup()
         {
@@ -76,24 +68,23 @@ namespace shoProd.GenericUtility
             test = reports.CreateTest(testName);
 
         }
-       
+
 
         [TearDown]
         public void TearDown()
         {
-            test.Log(Status.Info, testName + " start");        
+            test.Log(Status.Info, testName + " start");
             if (TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Failed)
             {
                 test.Log(Status.Fail, testName + " failed");
                 ITakesScreenshot ts = (ITakesScreenshot)driver;
-                string value = ts.GetScreenshot().AsBase64EncodedString;
-                test.AddScreenCaptureFromBase64String(value, testName);
+                string filepath = ts.GetScreenshot().AsBase64EncodedString;
+                test.AddScreenCaptureFromBase64String(filepath);
             }
             else if (TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Passed)
             {
                 test.Log(Status.Pass, testName + " passed");
             }
-
             hp.getLogoutLink().Click();
             Console.WriteLine("logout here");
         }
@@ -102,6 +93,7 @@ namespace shoProd.GenericUtility
         public void TearDownNow()
         {
             driver.Quit();
+            
             driver.Dispose();
             reports.Flush();
         }

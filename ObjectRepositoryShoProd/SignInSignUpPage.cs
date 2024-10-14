@@ -11,13 +11,13 @@ namespace shoProdSample.ObjectRepositoryShoProd
     internal class SignInSignUpPage
     {
         IWebDriver driver;
-        public SignInSignUpPage(IWebDriver driver) 
+        public SignInSignUpPage(IWebDriver driver)
         {
             this.driver = driver;
-            PageFactory.InitElements(driver,this);
+            PageFactory.InitElements(driver, this);
         }
 
-        [FindsBy(How=How.Name,Using ="email")]
+        [FindsBy(How = How.Name, Using = "email")]
         private IWebElement usernameTextField;
         public IWebElement getUsernameTextField() { return usernameTextField; }
 

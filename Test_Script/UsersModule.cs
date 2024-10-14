@@ -17,7 +17,6 @@ namespace shoProd.Test_Script
         {
             Console.WriteLine("addTo cart");
             BooksPage bp = hp.clickOnBooksLink();
-            Assert.AreEqual("hy", "hello");
             ComicsPage cp = bp.ClickOnComicsLink();
             //Assert.Fail();
             cp.getAddToCartButton().SendKeys(Keys.Enter);
@@ -26,11 +25,14 @@ namespace shoProd.Test_Script
             string alertText = alert.Text;
             alert.Accept();
             Console.WriteLine(alertText);
+            List<IWebElement> webElements = driver.FindElements(By.Name("q")).ToList();
         }
 
         [Test]
         public void AddToCartFromElectronics()
         {
+            var value = driver.Url;
+            Console.WriteLine("url is : "+value);
             ElectronicsPage ep = hp.ClickOnElectronicsLink();
             IAlert alert = ep.ClickOnAddTocartButton();
             string alertText = alert.Text;
